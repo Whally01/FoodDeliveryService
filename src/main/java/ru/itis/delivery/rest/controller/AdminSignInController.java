@@ -1,4 +1,4 @@
-package ru.itis.delivery.web.controller;
+package ru.itis.delivery.rest.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,22 +9,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.itis.delivery.model.User;
 import ru.itis.delivery.service.UserService;
-import ru.itis.delivery.web.dto.UserDto;
+import ru.itis.delivery.rest.dto.UserDto;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/registration")
-public class UserRegistrationController {
+@Controller("/signin")
+public class AdminSignInController {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;
 
-    @ModelAttribute("user")
+    @ModelAttribute("admin")
     public UserDto userRegistrationDto() {
         return new UserDto();
     }
@@ -32,15 +30,15 @@ public class UserRegistrationController {
     @GetMapping
     public String showRegistrationForm(Model model) {
         LOGGER.debug("Rendering registration page.");
-        return "registration";
+        return "signin";
     }
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto,
                                       BindingResult result) {
 
-        User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null) {
+        User user = userService.findByEmail(userDto.getEmail());
+        if (user != null) {
             result.rejectValue("email", null, "Уже существует аккаунт с таким email-ом");
         }
 
@@ -51,5 +49,4 @@ public class UserRegistrationController {
         userService.save(userDto);
         return "redirect:/registration?success";
     }
-
 }

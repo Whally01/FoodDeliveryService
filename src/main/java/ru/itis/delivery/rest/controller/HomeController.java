@@ -1,4 +1,4 @@
-package ru.itis.delivery.web.controller;
+package ru.itis.delivery.rest.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

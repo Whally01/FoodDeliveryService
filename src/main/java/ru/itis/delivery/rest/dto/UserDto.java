@@ -1,10 +1,12 @@
-package ru.itis.delivery.web.dto;
+package ru.itis.delivery.rest.dto;
 
 import ru.itis.delivery.constraint.FieldMatch;
+import ru.itis.delivery.model.Role;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.Collection;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "Пароль должен совпадать"),
@@ -32,6 +34,16 @@ public class UserDto {
 
     @AssertTrue
     private Boolean terms;
+
+    private Collection<Role> roles;
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getFirstName() {
         return firstName;

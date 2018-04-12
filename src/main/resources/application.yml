@@ -25,5 +25,5 @@
 #  level:
 #    root: WARN
 #    com.memorynotfound: DEBUG
-#    org.springframework.web: INFO
+#    org.springframework.rest: INFO
 #    org.springframework.security: INFO

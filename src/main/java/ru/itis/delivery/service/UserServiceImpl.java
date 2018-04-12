@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.delivery.model.Role;
 import ru.itis.delivery.model.User;
 import ru.itis.delivery.repository.UserRepository;
-import ru.itis.delivery.web.dto.UserDto;
+import ru.itis.delivery.rest.dto.UserDto;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,13 +45,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User save(UserDto registration) {
+    public User save(UserDto userDto) {
         User user = new User();
-        user.setFirstName(registration.getFirstName());
-        user.setLastName(registration.getLastName());
-        user.setEmail(registration.getEmail());
-        user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+       // if (userDto.get)
+        user.setRoles(Arrays.asList(new Role("ROLE_CLIENT")));
         return userRepository.save(user);
     }
 

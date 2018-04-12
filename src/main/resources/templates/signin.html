@@ -24,7 +24,7 @@ http://www.thymeleaf.org ">
             </div>
 
             <h1>Registration</h1>
-            <form th:action="@{/registration}" th:object="${user}" method="post">
+            <form th:action="@{/signin}" th:object="${admin}" method="post">
 
                 <p class="error-message"
                    th:if="${#fields.hasGlobalErrors()}"
@@ -99,15 +99,15 @@ http://www.thymeleaf.org ">
                            type="checkbox"
                            th:field="*{terms}"/>
                     <label class="control-label" for="terms">
-                        I agree with the <a href="#">terms and conditions</a> for Registration.
+                        Согласны с <a href="#">правилами</a> для Регистрации.
                     </label>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('terms')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+                    <button type="submit" class="btn btn-success">Регистрация</button>
+                    <span>Уже зарегестрированы? <a href="/" th:href="@{/login}">Войти</a></span>
                 </div>
 
             </form>
